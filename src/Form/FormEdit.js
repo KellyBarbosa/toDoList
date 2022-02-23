@@ -6,14 +6,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
-
 import "./ToDoForm.css";
 
-function ToDoForm() {
-  const [input, setInput] = useState("");
-  const [priority, setPriority] = useState("Low");
-  const [tasks, setTasks] = useState([]);
-  let navigate = useNavigate();
+function FormEdit( editTaskData ) {
+  console.log(editTaskData)
+  const [input, setInput] = useState(editTaskData.title);
+  const [priority, setPriority] = useState(editTaskData.priority);
 
   const currencies = [
     {
@@ -30,45 +28,12 @@ function ToDoForm() {
     },
   ];
 
-  useEffect(() => {
-    fetch("http://localhost:5000/tasks", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setTasks(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  function addTask({ input, priority }) {
-    fetch("http://localhost:5000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: tasks.length + 1,
-        title: input,
-        priority: priority,
-        isCompleted: false,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
-  }
-
+  
   function handleSubmit(e) {
     e.preventDefault();
-    setInput("");
+    //setInput("");
     if (input !== "" && input !== null && input.trim() !== "") {
-      addTask({ input, priority });
+      //editTask({ input, priority });
     } else {
       alert("Preencha o campo antes de enviar!");
     }
@@ -114,10 +79,10 @@ function ToDoForm() {
         }}
         endIcon={<SendIcon />}
       >
-        Send
+        Save
       </Button>
     </form>
   );
 }
 
-export default ToDoForm;
+export default FormEdit;

@@ -17,6 +17,18 @@
       "title": "Task 3",
       "priority": "High",
       "isCompleted": true
+    },
+    {
+      "id": 4,
+      "title": "Other task",
+      "priority": "Medium",
+      "isCompleted": false
+    },
+    {
+      "id": 5,
+      "title": "New task",
+      "priority": "High",
+      "isCompleted": false
     }
   ]
 }

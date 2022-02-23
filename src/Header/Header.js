@@ -1,15 +1,39 @@
-import React from 'react'
+import React from "react";
 
-import './Header.css'
+import Button from "@mui/material/Button";
+
+import "./Header.css";
+
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  return (
-    <div className='Header'>
-      <h1>
-        To Do List
-      </h1>
-      </div>
-  )
-}
+  let navigate = useNavigate();
 
-export default Header
+  function handleClickForm() {
+    navigate("/form");
+  }
+
+  function handleClickHome() {
+    navigate("/");
+  }
+
+  return (
+    <div className="Header">
+      <h1 onClick={handleClickHome}>To Do List</h1>
+      <Button
+        variant="outlined"
+        className="btnAdd"
+        sx={{
+          color: "white",
+          borderColor: "white",
+          height: "40px",
+        }}
+        onClick={handleClickForm}
+      >
+        Add new task
+      </Button>
+    </div>
+  );
+};
+
+export default Header;

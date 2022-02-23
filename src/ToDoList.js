@@ -24,7 +24,7 @@ function ToDoList() {
       .catch((err) => console.log(err));
   }
 
-  function addTask({ input, priority }) {
+  /* function addTask({ input, priority }) {
     fetch("http://localhost:5000/tasks", {
       method: "POST",
       headers: {
@@ -43,7 +43,7 @@ function ToDoList() {
         loadData();
       })
       .catch((err) => console.log(err));
-  }
+  } */
 
   function editTask(taskData) {
     //console.log('Edit: ',taskData)
@@ -57,15 +57,13 @@ function ToDoList() {
       .then((resp) => resp.json())
       .then((data) => {
         //console.log(data);
-        loadData();
+        //loadData();
       })
       .catch((err) => console.log(err));
   }
 
   function removeTask(taskData) {
-    //console.log("Remove: ", taskData);
-
-      fetch(`http://localhost:5000/tasks/${taskData.id}`, {
+    fetch(`http://localhost:5000/tasks/${taskData.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -73,10 +71,9 @@ function ToDoList() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        //console.log(data);
-        loadData()
+        //loadData()
       })
-      .catch((err) => console.log(err)); 
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -92,7 +89,7 @@ function ToDoList() {
         );
       })}
 
-      <ToDoForm addTask={addTask} />
+      {/*  <ToDoForm addTask={addTask} /> */}
     </div>
   );
 }
