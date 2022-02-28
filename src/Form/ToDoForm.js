@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
 import "./ToDoForm.css";
+import API from "../API";
 
 function ToDoForm() {
   const [input, setInput] = useState("");
@@ -30,44 +31,14 @@ function ToDoForm() {
   ];
 
   useEffect(() => {
-    fetch("http://localhost:5000/tasks", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setTasks(data);
-      })
-      .catch((err) => console.log(err));
+    API.loadData().then((data) => setTasks(data));
   }, []);
-
-  function addTask({ input, priority }) {
-    fetch("http://localhost:5000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: tasks.length + 1,
-        title: input,
-        priority: priority,
-        isCompleted: false,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     setInput("");
     if (input !== "" && input !== null && input.trim() !== "") {
-      addTask({ input, priority });
+      API.addTask( tasks.length + 1, {input, priority }).then(navigate("/"));
     } else {
       alert("Preencha o campo antes de enviar!");
     }

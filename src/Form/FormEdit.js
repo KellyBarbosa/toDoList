@@ -7,12 +7,15 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
 import "./ToDoForm.css";
+import API from '../API';
 
 function FormEdit() {
 
   const location = useLocation();
   const [title, setTitle] = useState(location.state.title);
   const [priority, setPriority] = useState(location.state.priority);
+  const [taskData, setTaskData] = useState(location.state);
+  //console.log(taskData)
   let navigate = useNavigate();
 
   const currencies = [
@@ -29,29 +32,15 @@ function FormEdit() {
       label: "High",
     },
   ];
-
+  
   function handleSubmit(e) {
     e.preventDefault();
     if (title !== "" && title !== null && title.trim() !== "") {
-      editTask({ title, priority });
+      API.editTask({...taskData, title, priority }).then(navigate("/"))
+      //editTask({ title, priority });
     } else {
       alert("Preencha o campo antes de enviar!");
     }
-  }
-
-  function editTask(taskData) {
-    fetch(`http://localhost:5000/tasks/${location.state.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(taskData),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
   }
 
   function handlePriority(e) {
