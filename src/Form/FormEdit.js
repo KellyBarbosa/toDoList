@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,11 +8,13 @@ import SendIcon from "@mui/icons-material/Send";
 
 import "./ToDoForm.css";
 
-function FormEdit( editTaskData ) {
-  console.log(editTaskData.task)
-  const [title, setTitle] = useState(editTaskData.task.title);
-  const [priority, setPriority] = useState(editTaskData.task.priority);
+function FormEdit() {
+
+  const location = useLocation();
+  const [title, setTitle] = useState(location.state.title);
+  const [priority, setPriority] = useState(location.state.priority);
   let navigate = useNavigate();
+
   const currencies = [
     {
       value: "Low",
@@ -28,10 +30,8 @@ function FormEdit( editTaskData ) {
     },
   ];
 
-  
   function handleSubmit(e) {
     e.preventDefault();
-    //setInput("");
     if (title !== "" && title !== null && title.trim() !== "") {
       editTask({ title, priority });
     } else {
@@ -40,11 +40,7 @@ function FormEdit( editTaskData ) {
   }
 
   function editTask(taskData) {
-    console.log('Edit Form, task: ', taskData)
-
-    //navigate('/editForm', { screen: '/editForm', props:  {taskData}})
-    //console.log('Edit: ',taskData)
-    fetch(`http://localhost:5000/tasks/${editTaskData.task.id}`, {
+    fetch(`http://localhost:5000/tasks/${location.state.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,13 +49,10 @@ function FormEdit( editTaskData ) {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        //console.log(data);
-        //loadData();
-        navigate('/');
+        navigate("/");
       })
       .catch((err) => console.log(err));
   }
-
 
   function handlePriority(e) {
     setPriority(e.target.value);

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ToDo from "./ToDo";
-import ToDoForm from "./Form/ToDoForm";
-import { useNavigate } from "react-router-dom";
-
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
-  let navigate = useNavigate();
 
   useEffect(() => {
     loadData();
@@ -27,31 +23,8 @@ function ToDoList() {
       .catch((err) => console.log(err));
   }
 
-  /* function addTask({ input, priority }) {
-    fetch("http://localhost:5000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: tasks.length + 1,
-        title: input,
-        priority: priority,
-        isCompleted: false,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        //console.log(data);
-        loadData();
-      })
-      .catch((err) => console.log(err));
-  } */
-
   function editTask(taskData) {
 
-    //navigate('/editForm', { screen: '/editForm', props:  {taskData}})
-    //console.log('Edit: ',taskData)
     fetch(`http://localhost:5000/tasks/${taskData.id}`, {
       method: "PATCH",
       headers: {
@@ -61,8 +34,7 @@ function ToDoList() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        //console.log(data);
-        //loadData();
+
       })
       .catch((err) => console.log(err));
   }
@@ -81,6 +53,7 @@ function ToDoList() {
       .catch((err) => console.log(err));
   }
 
+
   return (
     <div>
       {tasks.map((task) => {
@@ -94,7 +67,6 @@ function ToDoList() {
         );
       })}
 
-      {/*  <ToDoForm addTask={addTask} /> */}
     </div>
   );
 }

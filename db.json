@@ -26,15 +26,21 @@
     },
     {
       "id": 5,
-      "title": "New task",
-      "priority": "Low",
+      "title": "Finalmente deu certo!",
+      "priority": "High",
       "isCompleted": true
     },
     {
       "id": 6,
-      "title": "New task 1.2",
+      "title": "New task",
       "priority": "Medium",
-      "isCompleted": false
+      "isCompleted": true
+    },
+    {
+      "id": 7,
+      "title": "New task (with edit)",
+      "priority": "High",
+      "isCompleted": true
     }
   ]
 }

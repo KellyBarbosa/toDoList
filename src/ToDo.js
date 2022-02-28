@@ -5,17 +5,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { EditRounded } from "@mui/icons-material";
 import Switch from "@mui/material/Switch";
 
-import FormEdit from '../src/Form/FormEdit'
+import { useNavigate } from "react-router-dom";
 
-function ToDo({ task, editTask, removeTask, editTaskForm }) {
+function ToDo({ task, editTask, removeTask }) {
   const [checked, setChecked] = useState(!task.isCompleted);
-  const [edit, setEdit] = useState(false);
+
+  let navigate = useNavigate();
 
   function handleEdit() {
-     //navigate('/editForm') 
-    setEdit(true)
-    //console.log(task.title)
-    editTask(task);
+    navigate("/editForm", { state: task });
   }
 
   function handleDelete() {
@@ -29,7 +27,7 @@ function ToDo({ task, editTask, removeTask, editTaskForm }) {
 
   return (
     <p>
-      {task.title} | {task.priority} | 
+      {task.title} | {task.priority} |
       {task.isCompleted ? (
         <Switch size="small" onClick={handleChecked} defaultChecked />
       ) : (
@@ -41,7 +39,6 @@ function ToDo({ task, editTask, removeTask, editTaskForm }) {
       <IconButton aria-label="edit" onClick={handleEdit}>
         <EditRounded />
       </IconButton>
-      {edit && <FormEdit task={task}/>}
     </p>
   );
 }
