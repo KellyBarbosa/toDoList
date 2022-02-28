@@ -9,10 +9,10 @@ import SendIcon from "@mui/icons-material/Send";
 import "./ToDoForm.css";
 
 function FormEdit( editTaskData ) {
-  console.log(editTaskData)
-  const [input, setInput] = useState(editTaskData.title);
-  const [priority, setPriority] = useState(editTaskData.priority);
-
+  console.log(editTaskData.task)
+  const [title, setTitle] = useState(editTaskData.task.title);
+  const [priority, setPriority] = useState(editTaskData.task.priority);
+  let navigate = useNavigate();
   const currencies = [
     {
       value: "Low",
@@ -32,12 +32,34 @@ function FormEdit( editTaskData ) {
   function handleSubmit(e) {
     e.preventDefault();
     //setInput("");
-    if (input !== "" && input !== null && input.trim() !== "") {
-      //editTask({ input, priority });
+    if (title !== "" && title !== null && title.trim() !== "") {
+      editTask({ title, priority });
     } else {
       alert("Preencha o campo antes de enviar!");
     }
   }
+
+  function editTask(taskData) {
+    console.log('Edit Form, task: ', taskData)
+
+    //navigate('/editForm', { screen: '/editForm', props:  {taskData}})
+    //console.log('Edit: ',taskData)
+    fetch(`http://localhost:5000/tasks/${editTaskData.task.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskData),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        //console.log(data);
+        //loadData();
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  }
+
 
   function handlePriority(e) {
     setPriority(e.target.value);
@@ -49,8 +71,8 @@ function FormEdit( editTaskData ) {
         id="outlined-basic"
         label="Enter a new task"
         variant="outlined"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         sx={{ marginRight: "10px" }}
       />
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ToDo from "./ToDo";
 import ToDoForm from "./Form/ToDoForm";
+import { useNavigate } from "react-router-dom";
+
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     loadData();
@@ -46,6 +49,8 @@ function ToDoList() {
   } */
 
   function editTask(taskData) {
+
+    //navigate('/editForm', { screen: '/editForm', props:  {taskData}})
     //console.log('Edit: ',taskData)
     fetch(`http://localhost:5000/tasks/${taskData.id}`, {
       method: "PATCH",
