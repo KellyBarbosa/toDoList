@@ -1,11 +1,10 @@
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   editTask(taskData) {
     return fetch(`http://localhost:5000/tasks/${taskData.id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(taskData),
     })
@@ -16,10 +15,10 @@ export default {
       .catch((err) => console.log(err));
   },
   async loadData() {
-    let data = await fetch("http://localhost:5000/tasks", {
-      method: "GET",
+    let data = await fetch('http://localhost:5000/tasks', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((resp) => resp.json())
@@ -29,18 +28,18 @@ export default {
       })
       .catch((err) => console.log(err));
 
-      //console.log('Data API: ',data);
-      return data;
-  }, 
-   addTask(id, { input, priority }) {
-    return fetch("http://localhost:5000/tasks", {
-      method: "POST",
+    //console.log('Data API: ',data);
+    return data;
+  },
+  addTask(id, { title, priority }) {
+    return fetch('http://localhost:5000/tasks', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         id: id,
-        title: input,
+        title: title,
         priority: priority,
         isCompleted: false,
       }),
@@ -51,16 +50,17 @@ export default {
         //navigate("/");
       })
       .catch((err) => console.log(err));
-  }, 
+  },
   removeTask(taskData) {
     return fetch(`http://localhost:5000/tasks/${taskData.id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-    }).then(() => {
-      window.location.href = window.location.href;
-    }
-    ).catch((err) => console.log(err));
-  }
+    })
+      .then(() => {
+        window.location.href = window.location.href;
+      })
+      .catch((err) => console.log(err));
+  },
 };

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ToDo from "./ToDo";
-
-import API from "./API";
-import { useNavigate } from "react-router-dom";
+import API from "../API/API";
+//import { useNavigate } from "react-router-dom";
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
-  let navigate = useNavigate();
+  //let navigate = useNavigate();
 
   useEffect(() => {
     API.loadData().then((data) => setTasks(data));

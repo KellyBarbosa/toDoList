@@ -1,20 +1,19 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import Button from "@mui/material/Button";
+import Button from '@mui/material/Button';
 
-import "./Header.css";
-
-import { useNavigate } from "react-router-dom";
+import './Header.css';
 
 const Header = () => {
   let navigate = useNavigate();
 
   function handleClickForm() {
-    navigate("/form");
+    navigate('/form');
   }
 
   function handleClickHome() {
-    navigate("/");
+    navigate('/');
   }
 
   return (
@@ -24,9 +23,9 @@ const Header = () => {
         variant="outlined"
         className="btnAdd"
         sx={{
-          color: "white",
-          borderColor: "white",
-          height: "40px",
+          color: 'white',
+          borderColor: 'white',
+          height: '40px',
         }}
         onClick={handleClickForm}
       >

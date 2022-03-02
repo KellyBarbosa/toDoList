@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Task 1",
       "priority": "Low",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": 2,
@@ -34,7 +34,19 @@
       "id": 6,
       "title": "New task",
       "priority": "Medium",
-      "isCompleted": true
+      "isCompleted": false
+    },
+    {
+      "id": 7,
+      "title": "Nova task 2",
+      "priority": "High",
+      "isCompleted": false
+    },
+    {
+      "id": 8,
+      "title": "Outra nova task 2",
+      "priority": "Medium",
+      "isCompleted": false
     }
   ]
 }

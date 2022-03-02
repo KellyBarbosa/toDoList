@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { EditRounded } from "@mui/icons-material";
-import Switch from "@mui/material/Switch";
-
-import { useNavigate } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { EditRounded } from '@mui/icons-material';
+import Switch from '@mui/material/Switch';
 
 function ToDo({ task, editTask, removeTask }) {
   const [checked, setChecked] = useState(!task.isCompleted);
@@ -13,7 +12,7 @@ function ToDo({ task, editTask, removeTask }) {
   let navigate = useNavigate();
 
   function handleEdit() {
-    navigate("/editForm", { state: task });
+    navigate('/form', { state: task });
   }
 
   function handleDelete() {
@@ -28,11 +27,7 @@ function ToDo({ task, editTask, removeTask }) {
   return (
     <p>
       {task.title} | {task.priority} |
-      {task.isCompleted ? (
-        <Switch size="small" onClick={handleChecked} defaultChecked />
-      ) : (
-        <Switch size="small" onClick={handleChecked} />
-      )}
+      {<Switch size="small" onClick={handleChecked} checked={!checked} />}
       <IconButton aria-label="delete" onClick={handleDelete}>
         <DeleteIcon />
       </IconButton>
